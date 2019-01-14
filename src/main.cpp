@@ -3386,7 +3386,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     if(Velocity_check(nHeight))
     {
         // Announce Velocity constraint failure
-        if(!Velocity(pindex->pprev, block))
+        if(!Velocity(pindexPrev, this))
         {
             return state.DoS(100, error("AcceptBlock() : Velocity rejected block %d, required parameters not met", nHeight));
         }
