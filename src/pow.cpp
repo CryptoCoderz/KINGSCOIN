@@ -219,7 +219,7 @@ unsigned int Terminal_Velocity_RateX(const CBlockIndex* pindexLast, const CBlock
        return bnNew.GetCompact();
 }
 
-unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
 {
     // Default with VRX
     unsigned int retarget = DIFF_VRX;
