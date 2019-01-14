@@ -146,6 +146,7 @@ unsigned int Terminal_Velocity_RateX(const CBlockIndex* pindexLast, const CBlock
        // Check for blocks to index | Allowing for diff reset during toggle
        if (pindexLast->nHeight < 9999999) {// TODO: Set fork block
            return bnTerminalVelocity.GetCompact(); // reset diff for transition
+       }
        // Set prev blocks...
        const CBlockIndex* pindexPrev = pindexLast;
        // ...and deduce spacing
