@@ -185,7 +185,7 @@ unsigned int Terminal_Velocity_RateX(const CBlockIndex* pindexLast, const CBlock
        }
        // Final mathematics
        TerminalAverage = (VLF1 + VLF2 + VLF3 + VLF4 + VLF5) / AverageDivisor;
-       // Differentiate PoW/PoS prev block
+       // Log PoS prev block
        const CBlockIndex* BlockVelocityType = pindexLast;
        // Retarget
        uint256 bnOld;
