@@ -40,7 +40,7 @@ bool Velocity_check(int nHeight)
    Returns true if proposed Block matches constrains */
 bool Velocity(CBlockIndex* prevBlock, CBlock* block)
 {
-    const MapPrevTx mapInputs;
+    // const MapPrevTx mapInputs;
 
     // Define values
     int64_t TXvalue = 0;
