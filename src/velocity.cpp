@@ -7,6 +7,7 @@
 #include "main.h"
 #include "velocity.h"
 #include "rpcserver.h"
+#include "timedata.h"
 #include "wallet.h"
 
 /* VelocityI(int nHeight) ? i : -1
