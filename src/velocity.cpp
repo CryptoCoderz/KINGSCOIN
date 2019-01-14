@@ -46,9 +46,6 @@ bool Velocity(CBlockIndex* prevBlock, CBlock* block)
     int64_t TXvalue = 0;
     int64_t TXinput = 0;
     int64_t TXfee = 0;
-    int64_t TXnondevfee = 0;
-    int64_t TXdevfee = 0;
-    int64_t TXnetfee = 0;
     int64_t TXcount = 0;
     int64_t TXlogic = 0;
     int64_t TXrate = 0;
@@ -63,7 +60,6 @@ bool Velocity(CBlockIndex* prevBlock, CBlock* block)
     int nHeight = prevBlock->nHeight+1;
     int i = VelocityI(nHeight);
     int HaveCoins = false;
-    bool fpayment = true;
     // Set stanard values
     TXrate = block->GetBlockTime() - prevBlock->GetBlockTime();
     TXstampC = block->nTime;
