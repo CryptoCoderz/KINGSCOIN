@@ -16,9 +16,8 @@ class arith_uint256;
 // Define difficulty retarget algorithms
 enum DiffMode {
     DIFF_DEFAULT = 0, // Default to invalid 0
-    DIFF_BTC = 1,     // Retarget every x blocks (Bitcoin style)
-    DIFF_KGW = 2,     // Retarget using Kimoto Gravity Well
-    DIFF_DGW = 3,     // Retarget using Dark Gravity Wave v3
+    DIFF_DGW = 1,     // Retarget using Dark Gravity Wave v3
+    DIFF_VRX = 2,     // Retarget using Terminal-Velocity-RateX
 };
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock);

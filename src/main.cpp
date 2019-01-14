@@ -29,6 +29,7 @@
 #include "ui_interface.h"
 #include "util.h"
 #include "utilmoneystr.h"
+#include "velocity.h"
 
 #ifdef ENABLE_WALLET
 #include "wallet.h"
@@ -3379,6 +3380,18 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         }
     }
 
+    int nHeight = pindex->nHeight;
+
+    // Check block against Velocity parameters
+    if(Velocity_check(nHeight))
+    {
+        // Announce Velocity constraint failure
+        if(!Velocity(pindex->pprev, block))
+        {
+            return state.DoS(100, error("AcceptBlock() : Velocity rejected block %d, required parameters not met", nHeight));
+        }
+    }
+
     if (block.GetHash() != Params().HashGenesisBlock() && !CheckWork(block, pindexPrev))
         return false;
 
@@ -3398,8 +3411,6 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         }
         return false;
     }
-
-    int nHeight = pindex->nHeight;
 
     // Write block to history file
     try {
@@ -3491,9 +3502,8 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     // ppcoin: check proof-of-stake
     // Limited duplicity on stake: prevents block flood attack
     // Duplicate stake allowed only when there is orphan child block
-    // TODO: Verify this section
-    if (pblock->IsProofOfStake() && setStakeSeen.count(pblock->GetProofOfStake()) && !mapOrphanBlocksByPrev.count(hash))
-        return error("ProcessNewBlock() : duplicate proof-of-stake (%s, %d) for block %s", pblock->GetProofOfStake().first.ToString().c_str(), pblock->GetProofOfStake().second, pblock->GetHash().ToString().c_str());
+    //if (pblock->IsProofOfStake() && setStakeSeen.count(pblock->GetProofOfStake())/* && !mapOrphanBlocksByPrev.count(hash)*/)
+    //    return error("ProcessNewBlock() : duplicate proof-of-stake (%s, %d) for block %s", pblock->GetProofOfStake().first.ToString().c_str(), pblock->GetProofOfStake().second, pblock->GetHash().ToString().c_str());
 
     // NovaCoin: check proof-of-stake block signature
     if (!pblock->CheckBlockSignature())
