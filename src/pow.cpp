@@ -110,7 +110,7 @@ unsigned int DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader* 
 unsigned int Terminal_Velocity_RateX(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
 {
        // Terminal-Velocity-RateX, v10-Beta-R7.1 (Pure PoS), written by Jonathan Dan Zaretsky - cryptocoderz@gmail.com
-       const CBigNum bnTerminalVelocity = Params().ProofOfWorkLimit();
+       const uint256 bnTerminalVelocity = Params().ProofOfWorkLimit();
        // Define values
        double VLF1 = 0;
        double VLF2 = 0;
@@ -188,8 +188,8 @@ unsigned int Terminal_Velocity_RateX(const CBlockIndex* pindexLast, const CBlock
        // Differentiate PoW/PoS prev block
        const CBlockIndex* BlockVelocityType = pindexLast;
        // Retarget
-       CBigNum bnOld;
-       CBigNum bnNew;
+       uint256 bnOld;
+       uint256 bnNew;
        TerminalFactor *= TerminalAverage;
        difficultyfactor = TerminalFactor;
        bnOld.SetCompact(BlockVelocityType->nBits);
