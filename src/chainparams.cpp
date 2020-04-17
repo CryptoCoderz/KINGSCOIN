@@ -54,14 +54,15 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x000009e8ec0a4a258bc779daa3c62c0069d454f50d4f16ccabe2bba3c40a297d"));
+    (0, uint256("0x000009e8ec0a4a258bc779daa3c62c0069d454f50d4f16ccabe2bba3c40a297d"))
+    (20250, uint256("0x3179ad5efd960b852814e20e17fd8258c18fc4d020f3887a0ff60b80895cd159"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1540198609, // * UNIX timestamp of last checkpoint block
-    0,          // * total number of transactions between genesis and last checkpoint
+    1546429634, // * UNIX timestamp of last checkpoint block
+    40562,          // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
-    2000        // * estimated number of transactions per day after checkpoint
+    1400        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
@@ -106,7 +107,7 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 2 * 60; 
+        nTargetTimespan = 2 * 60;
         nTargetSpacing = 1 * 60;  // Kingscoin: 1 minute blocks during POW (block 1-200)
         nMaturity = 5; // 6 block maturity (+1 elsewhere)
         nMasternodeCountDrift = 20;
@@ -140,6 +141,10 @@ public:
         assert(hashGenesisBlock == uint256("0x000009e8ec0a4a258bc779daa3c62c0069d454f50d4f16ccabe2bba3c40a297d"));
         assert(genesis.hashMerkleRoot == uint256("0xff60ff34a53d6f1c57621256e19fe0e2e8c168b05eb55c9d79ee9fddd9bb31b2"));
 
+        vSeeds.push_back(CDNSSeedData("Seed1", "seed1.kingscoin.biz"));
+        vSeeds.push_back(CDNSSeedData("Seed2", "seed2.kingscoin.biz"));
+        vSeeds.push_back(CDNSSeedData("Seed3", "seed3.kingscoin.biz"));
+        vSeeds.push_back(CDNSSeedData("Explorer", "explorer.kingscoin.biz"));
 
         // Kingscoin addresses start with 'K'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 45);
@@ -167,9 +172,9 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "04cc17389379a0e323f53ea504d38cd71f43dc22f597805fed33a51b05ced1a3ae0db84089985f351b3737721736a82f58c8bd529f79c8ffe57e922bda792146ab";
+        strSporkKey = "0260dcd59f821346a70080b1f1f6905c191eea298daf9c0090841dd583eea5df09";
         strMasternodePoolDummyAddress = "KSJVWUkt6HtSCY2SaJ2akeyJUg8bg1hW3S";
-        nStartMasternodePayments = 4070908800; 
+        nStartMasternodePayments = 4070908800;
 
         nBudget_Fee_Confirmations = 6; // Number of confirmations for the finalization fee
     }
